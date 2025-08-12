@@ -1,66 +1,19 @@
-==> Cloning from https://github.com/SFcristofer/Store
-==> Checking out commit b69bdfd7cf8f593c5ab03dc3cdf2ef438c1a8fcb in branch main
-==> Using Node.js version 22.16.0 (default)
-==> Docs on specifying a Node.js version: https://render.com/docs/node-version
-==> Running build command ' cd backend && npm install'...
-up to date, audited 390 packages in 1s
-43 packages are looking for funding
-  run `npm fund` for details
-found 0 vulnerabilities
-==> Uploading build...
-==> Uploaded in 9.2s. Compression took 1.5s
-==> Build successful 🎉
-==> Deploying...
-==> Running 'node backend/index.js'
-node:internal/modules/cjs/loader:1404
-  throw err;
-  ^
-Error: Cannot find module '/opt/render/project/src/backend/index.js'
-    at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)
-    at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
-    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
-    at Function._load (node:internal/modules/cjs/loader:1211:37)
-    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
-    at node:internal/main/run_main_module:36:49 {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: []
-}
-Node.js v22.16.0
-==> Exited with status 1
 ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
-==> Running 'node backend/index.js'
-node:internal/modules/cjs/loader:1404
-  throw err;
-  ^
-Error: Cannot find module '/opt/render/project/src/backend/index.js'
-    at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)
-    at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
-    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
-    at Function._load (node:internal/modules/cjs/loader:1211:37)
+==> Running 'npm start'
+> backend@1.0.0 start
+> node index.js
+/opt/render/project/src/backend/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:55
+        throw new Error(`Please install ${moduleName} package manually`);
+        ^
+Error: Please install pg package manually
+    at ConnectionManager._loadDialectModule (/opt/render/project/src/backend/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:55:15)
+    at new ConnectionManager (/opt/render/project/src/backend/node_modules/sequelize/lib/dialects/postgres/connection-manager.js:15:24)
+    at new PostgresDialect (/opt/render/project/src/backend/node_modules/sequelize/lib/dialects/postgres/index.js:13:30)
+    at new Sequelize (/opt/render/project/src/backend/node_modules/sequelize/lib/sequelize.js:194:20)
+    at Object.<anonymous> (/opt/render/project/src/backend/config/database.js:4:19)
+    at Module._compile (node:internal/modules/cjs/loader:1730:14)
+    at Object..js (node:internal/modules/cjs/loader:1895:10)
+    at Module.load (node:internal/modules/cjs/loader:1465:32)
+    at Function._load (node:internal/modules/cjs/loader:1282:12)
     at TracingChannel.traceSync (node:diagnostics_channel:322:14)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
-    at node:internal/main/run_main_module:36:49 {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: []
-}
-Node.js v22.16.0
-==> Running 'node backend/index.js'
-node:internal/modules/cjs/loader:1404
-  throw err;
-  ^
-Error: Cannot find module '/opt/render/project/src/backend/index.js'
-    at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)
-    at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
-    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
-    at Function._load (node:internal/modules/cjs/loader:1211:37)
-    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
-    at node:internal/main/run_main_module:36:49 {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: []
-}
 Node.js v22.16.0
