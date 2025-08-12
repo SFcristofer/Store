@@ -1,26 +1,66 @@
-Uncaught runtime errors:
-×
-ERROR
-Rendered more hooks than during the previous render.
-    at updateWorkInProgressHook (http://localhost:3001/static/js/bundle.js:159756:15)
-    at updateReducer (http://localhost:3001/static/js/bundle.js:159847:16)
-    at Object.useState (http://localhost:3001/static/js/bundle.js:168818:16)
-    at exports.useState (http://localhost:3001/static/js/bundle.js:195936:32)
-    at UserProfile (http://localhost:3001/main.06d5b9572602d4754747.hot-update.js:342:126)
-    at Object.react_stack_bottom_frame (http://localhost:3001/static/js/bundle.js:169432:18)
-    at renderWithHooks (http://localhost:3001/static/js/bundle.js:159642:20)
-    at updateFunctionComponent (http://localhost:3001/static/js/bundle.js:161335:17)
-    at beginWork (http://localhost:3001/static/js/bundle.js:161921:16)
-    at runWithFiberInDEV (http://localhost:3001/static/js/bundle.js:157413:68)
-ERROR
-Rendered more hooks than during the previous render.
-    at updateWorkInProgressHook (http://localhost:3001/static/js/bundle.js:159756:15)
-    at updateReducer (http://localhost:3001/static/js/bundle.js:159847:16)
-    at Object.useState (http://localhost:3001/static/js/bundle.js:168818:16)
-    at exports.useState (http://localhost:3001/static/js/bundle.js:195936:32)
-    at UserProfile (http://localhost:3001/main.2c76b1937e6702cfff75.hot-update.js:342:126)
-    at Object.react_stack_bottom_frame (http://localhost:3001/static/js/bundle.js:169432:18)
-    at renderWithHooks (http://localhost:3001/static/js/bundle.js:159642:20)
-    at updateFunctionComponent (http://localhost:3001/static/js/bundle.js:161335:17)
-    at beginWork (http://localhost:3001/static/js/bundle.js:161921:16)
-    at runWithFiberInDEV (http://localhost:3001/static/js/bundle.js:157413:68)
+==> Cloning from https://github.com/SFcristofer/Store
+==> Checking out commit b69bdfd7cf8f593c5ab03dc3cdf2ef438c1a8fcb in branch main
+==> Using Node.js version 22.16.0 (default)
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+==> Running build command ' cd backend && npm install'...
+up to date, audited 390 packages in 1s
+43 packages are looking for funding
+  run `npm fund` for details
+found 0 vulnerabilities
+==> Uploading build...
+==> Uploaded in 9.2s. Compression took 1.5s
+==> Build successful 🎉
+==> Deploying...
+==> Running 'node backend/index.js'
+node:internal/modules/cjs/loader:1404
+  throw err;
+  ^
+Error: Cannot find module '/opt/render/project/src/backend/index.js'
+    at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+    at Function._load (node:internal/modules/cjs/loader:1211:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+    at node:internal/main/run_main_module:36:49 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+Node.js v22.16.0
+==> Exited with status 1
+==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+==> Running 'node backend/index.js'
+node:internal/modules/cjs/loader:1404
+  throw err;
+  ^
+Error: Cannot find module '/opt/render/project/src/backend/index.js'
+    at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+    at Function._load (node:internal/modules/cjs/loader:1211:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+    at node:internal/main/run_main_module:36:49 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+Node.js v22.16.0
+==> Running 'node backend/index.js'
+node:internal/modules/cjs/loader:1404
+  throw err;
+  ^
+Error: Cannot find module '/opt/render/project/src/backend/index.js'
+    at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+    at Function._load (node:internal/modules/cjs/loader:1211:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+    at node:internal/main/run_main_module:36:49 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+Node.js v22.16.0
