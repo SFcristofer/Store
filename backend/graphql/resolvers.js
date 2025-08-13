@@ -879,9 +879,7 @@ const resolvers = {
         //     pass: process.env.EMAIL_PASS, // Your email password or app-specific password
         //   },
         // });
-
         // const verificationLink = `http://localhost:3000/verify-email/${verificationToken}`; // Adjust frontend URL as needed
-
         // const mailOptions = {
         //   from: process.env.EMAIL_USER,
         //   to: user.email,
@@ -895,7 +893,6 @@ const resolvers = {
         //     <p>Thank you!</p>
         //   `,
         // };
-
         // try {
         //   await transporter.sendMail(mailOptions);
         //   logger.info(`Verification email sent to ${user.email}`);
@@ -1349,7 +1346,6 @@ const resolvers = {
         console.log(`Total Amount: ${createdOrder.totalAmount}`);
         console.log(`Delivery Address: ${createdOrder.deliveryAddress}`);
         console.log('--- END NOTIFICATION ---');
-
         // TODO: Implement actual email notification to seller
         // Example using Nodemailer (requires setup and configuration)
         // const nodemailer = require('nodemailer'); // Uncomment at top of file if not already
@@ -1360,7 +1356,6 @@ const resolvers = {
         //     pass: process.env.EMAIL_PASS,
         //   },
         // });
-
         // const mailOptions = {
         //   from: process.env.EMAIL_USER,
         //   to: seller.email, // Seller's email
@@ -1380,7 +1375,6 @@ const resolvers = {
         //     <p>Thank you!</p>
         //   `,
         // };
-
         // try {
         //   await transporter.sendMail(mailOptions);
         //   logger.info(`Order notification email sent to ${seller.email}`);
@@ -1942,9 +1936,7 @@ const resolvers = {
       //     pass: process.env.EMAIL_PASS, // Your email password or app-specific password
       //   },
       // });
-
       // const resetLink = `http://localhost:3000/reset-password/${resetToken}`; // Adjust frontend URL as needed
-
       // const mailOptions = {
       //   from: process.env.EMAIL_USER,
       //   to: user.email,
@@ -1959,7 +1951,6 @@ const resolvers = {
       //     <p>Thank you!</p>
       //   `,
       // };
-
       // try {
       //   await transporter.sendMail(mailOptions);
       //   logger.info(`Password reset email sent to ${user.email}`);
@@ -1997,3 +1988,158 @@ const resolvers = {
           'INVALID_OR_EXPIRED_TOKEN'
         );
       }
+
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(newPassword, salt);
+      user.resetPasswordToken = null;
+      user.resetPasswordExpires = null;
+      await user.save();
+
+      return 'Your password has been updated.';
+    },
+
+    verifyEmail: async (_, { token }) => {
+      const schema = Joi.object({
+        token: Joi.string().required(),
+      });
+
+      const { error } = schema.validate({ token });
+      if (error) {
+        logger.error('Validation error during email verification:', error.details[0].message);
+        throw new ApolloError(error.details[0].message, 'BAD_USER_INPUT');
+      }
+
+      const user = await User.findOne({
+        where: {
+          verificationToken: token,
+          verificationTokenExpires: { [Op.gt]: Date.now() },
+        },
+      });
+
+      if (!user) {
+        throw new ApolloError(
+          'Email verification token is invalid or has expired.',
+          'INVALID_OR_EXPIRED_VERIFICATION_TOKEN'
+        );
+      }
+
+      user.isVerified = true;
+      user.verificationToken = null;
+      user.verificationTokenExpires = null;
+      await user.save();
+
+      return 'Email verified successfully!';
+    },
+
+    deactivateAccount: async (_, __, { user }) => {
+      isAuth({ user }); // Ensure user is authenticated
+      const foundUser = await User.findByPk(user.id);
+      if (!foundUser) {
+        throw new ApolloError('User not found', 'USER_NOT_FOUND');
+      }
+      foundUser.status = 'inactive';
+      await foundUser.save();
+      return 'Account deactivated successfully.';
+    },
+
+    deleteAccount: async (_, __, { user }) => {
+      isAuth({ user }); // Ensure user is authenticated
+      const foundUser = await User.findByPk(user.id);
+      if (!foundUser) {
+        throw new ApolloError('User not found', 'USER_NOT_FOUND');
+      }
+      // Soft delete: set status to 'deleted'
+      foundUser.status = 'deleted';
+      await foundUser.save();
+      // Optionally, you might want to delete associated data (e.g., products if seller)
+      // or anonymize data, depending on business rules and data retention policies.
+      return 'Account deleted successfully.';
+    },
+
+    adminUpdateUserRole: async (_, { userId, role }, context) => {
+      isAdmin(context);
+      const user = await User.findByPk(userId);
+      if (!user) {
+        throw new ApolloError('User not found', 'USER_NOT_FOUND');
+      }
+
+      const allowedRoles = ['customer', 'seller', 'admin'];
+      if (!allowedRoles.includes(role)) {
+        throw new ApolloError(`Invalid role. Must be one of: ${allowedRoles.join(', ')}`, 'BAD_USER_INPUT');
+      }
+
+      user.role = role;
+      await user.save();
+      return user;
+    },
+
+    adminUpdateUserStatus: async (_, { userId, status }, context) => {
+      isAdmin(context);
+      const user = await User.findByPk(userId);
+      if (!user) {
+        throw new ApolloError('User not found', 'USER_NOT_FOUND');
+      }
+
+      const allowedStatuses = ['active', 'inactive', 'deleted'];
+      if (!allowedStatuses.includes(status)) {
+        throw new ApolloError(`Invalid status. Must be one of: ${allowedStatuses.join(', ')}`, 'BAD_USER_INPUT');
+      }
+
+      user.status = status;
+      await user.save();
+      return user;
+    },
+
+    adminUpdateStoreStatus: async (_, { storeId, status }, context) => {
+      isAdmin(context);
+      const store = await Store.findByPk(storeId);
+      if (!store) {
+        throw new ApolloError('Store not found', 'STORE_NOT_FOUND');
+      }
+
+      const allowedStatuses = ['active', 'inactive', 'deleted'];
+      if (!allowedStatuses.includes(status)) {
+        throw new ApolloError(`Invalid status. Must be one of: ${allowedStatuses.join(', ')}`, 'BAD_USER_INPUT');
+      }
+
+      store.status = status;
+      await store.save();
+      return store;
+    },
+
+    adminUpdateProductStatus: async (_, { productId, status }, context) => {
+      isAdmin(context);
+      const product = await Product.findByPk(productId);
+      if (!product) {
+        throw new ApolloError('Product not found', 'PRODUCT_NOT_FOUND');
+      }
+
+      const allowedStatuses = ['active', 'inactive', 'deleted'];
+      if (!allowedStatuses.includes(status)) {
+        throw new ApolloError(`Invalid status. Must be one of: ${allowedStatuses.join(', ')}`, 'BAD_USER_INPUT');
+      }
+
+      product.status = status;
+      await product.save();
+      return product;
+    },
+
+    _setUserRole: async (_, { email, role }) => {
+      // No auth check - for internal/seed use only
+      const user = await User.findOne({ where: { email } });
+      if (!user) {
+        return false;
+      }
+      // Add validation for role if needed
+      const allowedRoles = ['customer', 'seller', 'admin'];
+      if (!allowedRoles.includes(role)) {
+        return false;
+      }
+      user.role = role;
+      await user.save();
+      return true;
+    },
+  },
+};
+
+module.exports = { typeDefs: require('./schema'), resolvers, context };
