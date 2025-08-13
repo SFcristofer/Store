@@ -1,0 +1,6 @@
+Send a POST request to query this endpoint
+
+curl --request POST \
+  --header 'content-type: application/json' \
+  --url 'https://store-ehnr.onrender.com/graphql' \
+  --data '{"query":"query { __typename }"}'
