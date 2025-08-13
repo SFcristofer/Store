@@ -21,8 +21,10 @@
     "morgan": "^1.10.1",
     "node-fetch": "^3.3.2",
     "sequelize": "^6.37.7",
-    "sqlite3": "^5.1.7",
-    "winston": "^3.17.0"
+    
+    "winston": "^3.17.0",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4"
   },
   "devDependencies": {
     "jest": "^30.0.5",

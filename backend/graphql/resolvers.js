@@ -879,9 +879,7 @@ const resolvers = {
         //     pass: process.env.EMAIL_PASS, // Your email password or app-specific password
         //   },
         // });
-
         // const verificationLink = `http://localhost:3000/verify-email/${verificationToken}`; // Adjust frontend URL as needed
-
         // const mailOptions = {
         //   from: process.env.EMAIL_USER,
         //   to: user.email,
@@ -895,7 +893,6 @@ const resolvers = {
         //     <p>Thank you!</p>
         //   `,
         // };
-
         // try {
         //   await transporter.sendMail(mailOptions);
         //   logger.info(`Verification email sent to ${user.email}`);
@@ -1349,7 +1346,6 @@ const resolvers = {
         console.log(`Total Amount: ${createdOrder.totalAmount}`);
         console.log(`Delivery Address: ${createdOrder.deliveryAddress}`);
         console.log('--- END NOTIFICATION ---');
-
         // TODO: Implement actual email notification to seller
         // Example using Nodemailer (requires setup and configuration)
         // const nodemailer = require('nodemailer'); // Uncomment at top of file if not already
@@ -1360,7 +1356,6 @@ const resolvers = {
         //     pass: process.env.EMAIL_PASS,
         //   },
         // });
-
         // const mailOptions = {
         //   from: process.env.EMAIL_USER,
         //   to: seller.email, // Seller's email
@@ -1380,7 +1375,6 @@ const resolvers = {
         //     <p>Thank you!</p>
         //   `,
         // };
-
         // try {
         //   await transporter.sendMail(mailOptions);
         //   logger.info(`Order notification email sent to ${seller.email}`);
@@ -1942,9 +1936,7 @@ const resolvers = {
       //     pass: process.env.EMAIL_PASS, // Your email password or app-specific password
       //   },
       // });
-
       // const resetLink = `http://localhost:3000/reset-password/${resetToken}`; // Adjust frontend URL as needed
-
       // const mailOptions = {
       //   from: process.env.EMAIL_USER,
       //   to: user.email,
@@ -1959,7 +1951,6 @@ const resolvers = {
       //     <p>Thank you!</p>
       //   `,
       // };
-
       // try {
       //   await transporter.sendMail(mailOptions);
       //   logger.info(`Password reset email sent to ${user.email}`);

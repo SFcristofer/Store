@@ -1,26 +1,19 @@
-Uncaught runtime errors:
-×
-ERROR
-Rendered more hooks than during the previous render.
-    at updateWorkInProgressHook (http://localhost:3001/static/js/bundle.js:159756:15)
-    at updateReducer (http://localhost:3001/static/js/bundle.js:159847:16)
-    at Object.useState (http://localhost:3001/static/js/bundle.js:168818:16)
-    at exports.useState (http://localhost:3001/static/js/bundle.js:195936:32)
-    at UserProfile (http://localhost:3001/main.06d5b9572602d4754747.hot-update.js:342:126)
-    at Object.react_stack_bottom_frame (http://localhost:3001/static/js/bundle.js:169432:18)
-    at renderWithHooks (http://localhost:3001/static/js/bundle.js:159642:20)
-    at updateFunctionComponent (http://localhost:3001/static/js/bundle.js:161335:17)
-    at beginWork (http://localhost:3001/static/js/bundle.js:161921:16)
-    at runWithFiberInDEV (http://localhost:3001/static/js/bundle.js:157413:68)
-ERROR
-Rendered more hooks than during the previous render.
-    at updateWorkInProgressHook (http://localhost:3001/static/js/bundle.js:159756:15)
-    at updateReducer (http://localhost:3001/static/js/bundle.js:159847:16)
-    at Object.useState (http://localhost:3001/static/js/bundle.js:168818:16)
-    at exports.useState (http://localhost:3001/static/js/bundle.js:195936:32)
-    at UserProfile (http://localhost:3001/main.2c76b1937e6702cfff75.hot-update.js:342:126)
-    at Object.react_stack_bottom_frame (http://localhost:3001/static/js/bundle.js:169432:18)
-    at renderWithHooks (http://localhost:3001/static/js/bundle.js:159642:20)
-    at updateFunctionComponent (http://localhost:3001/static/js/bundle.js:161335:17)
-    at beginWork (http://localhost:3001/static/js/bundle.js:161921:16)
-    at runWithFiberInDEV (http://localhost:3001/static/js/bundle.js:157413:68)
+==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+==> Running 'npm start'
+> backend@1.0.0 start
+> node index.js
+/opt/render/project/src/backend/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:55
+        throw new Error(`Please install ${moduleName} package manually`);
+        ^
+Error: Please install pg package manually
+    at ConnectionManager._loadDialectModule (/opt/render/project/src/backend/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:55:15)
+    at new ConnectionManager (/opt/render/project/src/backend/node_modules/sequelize/lib/dialects/postgres/connection-manager.js:15:24)
+    at new PostgresDialect (/opt/render/project/src/backend/node_modules/sequelize/lib/dialects/postgres/index.js:13:30)
+    at new Sequelize (/opt/render/project/src/backend/node_modules/sequelize/lib/sequelize.js:194:20)
+    at Object.<anonymous> (/opt/render/project/src/backend/config/database.js:4:19)
+    at Module._compile (node:internal/modules/cjs/loader:1730:14)
+    at Object..js (node:internal/modules/cjs/loader:1895:10)
+    at Module.load (node:internal/modules/cjs/loader:1465:32)
+    at Function._load (node:internal/modules/cjs/loader:1282:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+Node.js v22.16.0

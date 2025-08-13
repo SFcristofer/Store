@@ -1,35 +1,36 @@
 const jwt = require('jsonwebtoken');
 const { AuthenticationError } = require('apollo-server-express');
-const logger = require('../config/logger');
 
 const isAuth = (context) => {
-  if (!context.user) {
-    logger.error('User not authenticated');
-    throw new AuthenticationError('You must be logged in to do that');
+  const authHeader = context.req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.split('Bearer ')[1];
+    if (token) {
+      try {
+        const user = jwt.verify(token, process.env.JWT_SECRET);
+        context.user = user.user;
+        return;
+      } catch (err) {
+        throw new AuthenticationError('Invalid/Expired token');
+      }
+    }
+    throw new Error("Authentication token must be 'Bearer [token]");
   }
-  return true;
+  throw new Error('Authorization header must be provided');
 };
 
 const isSeller = (context) => {
-  isAuth(context); // First, ensure user is authenticated
-  if (context.user.role !== 'seller') {
-    logger.error('User is not a seller:', context.user.id);
-    throw new AuthenticationError('You are not authorized to perform this action');
+  isAuth(context);
+  if (context.user.role !== 'seller' && context.user.role !== 'admin') {
+    throw new AuthenticationError('You must be a seller or admin to perform this action');
   }
-  return true;
 };
 
 const isAdmin = (context) => {
-  isAuth(context); // First, ensure user is authenticated
+  isAuth(context);
   if (context.user.role !== 'admin') {
-    logger.error('User is not an admin:', context.user.id);
-    throw new AuthenticationError('You are not authorized to perform this action (Admin required)');
+    throw new AuthenticationError('You must be an admin to perform this action');
   }
-  return true;
 };
 
-module.exports = {
-  isAuth,
-  isSeller,
-  isAdmin,
-};
+module.exports = { isAuth, isSeller, isAdmin };
