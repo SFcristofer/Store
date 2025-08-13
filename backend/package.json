@@ -23,8 +23,8 @@
     "sequelize": "^6.37.7",
     
     "winston": "^3.17.0",
-    "pg": "^8.12.0",
-    "pg-hstore": "^2.3.7"
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4"
   },
   "devDependencies": {
     "jest": "^30.0.5",
