@@ -25,18 +25,15 @@ app.use('/api/orders', ordersRoutes); // Use new orders route
 
 async function startServer() {
   const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    context,
-    formatError: (error) => {
-      logger.error('GraphQL Error:', error);
-      // Hide sensitive error details in production
-      if (process.env.NODE_ENV === 'production') {
-        return new Error('Internal server error');
-      }
-      return error; // In development, return the full error
-    },
-  });
+  schema,
+  resolvers,
+  context: ({ req }) => ({ req, models, SECRET }),
+  formatError: (error) => {
+    console.error("GraphQL Error:", error);
+    return error;
+  },
+  persistedQueries: false,
+});
 
   await server.start();
   server.applyMiddleware({ app });
